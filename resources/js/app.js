@@ -6,19 +6,19 @@ Dropzone.autoDiscover = false;
 
 const dropzone = new Dropzone('#dropzone',{
     dictDefaultMessage: "Sube aquí tu imagen",
-    acceptedFiles: ".pdf",
+    acceptedFiles: ".png,.jpg,.jpeg,.gif,.pdf",
     addRemoveLinks: true,
     dictRemoveFile: "Borrar archivo",
-    maxFiles: 1,
+    maxFiles: 100,
     uploadMultiple: false,
     //Trabajado con imagen en el contenedor de Dropzone
     init: function(){
         if(document.querySelector('[name="file"]').value.trim()){
             const file_upload= {};
-            file_upload.size = 1234;
+            file_upload.size = 1000;
             file_upload.name = document.querySelector('[name="file"]').value;
             this.options.addedfile.call(this, file_upload);
-            this.options.thumbnail.call(this, file_upload, '/uploads/${file.name}');
+            this.options.thumbnail.call(this, file_upload, '/uploads/${file_upload.name}');
             file_upload.previewElement.classList.add('dz-success', 'dz-complete');
         }
     }

@@ -19,9 +19,10 @@ return new class extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->decimal('price', 10, 2);
-            $table->enum('priority', ['alto', 'medio', 'bajo']);
+            $table->string('priority');
             $table->string('admin');
             $table->string('collaborator');
+            $table->string('description');
             $table->string('file')->nullable();;
             $table->timestamps();
         });

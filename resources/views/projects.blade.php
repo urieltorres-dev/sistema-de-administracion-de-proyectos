@@ -18,23 +18,23 @@
 
     <!--Profile Tabs-->
     <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 px-2 mt-2">
-        @foreach ($projects as $proyect)
+        @foreach ($projects as $project)
         <!--Top user 1-->
         <div class="rounded rounded-t-lg overflow-hidden shadow max-w-xs">
             <div class="text-center px-3 pb-6 pt-2">
-                <h3 class="text-black text-sm bold font-sans">{{$proyect->name}}</h3>
-                <p class="mt-2 font-sans font-light text-grey-700">{{$proyect->client}}</p>
+                <h3 class="text-black text-sm bold font-sans">{{$project->name}}</h3>
+                <p class="mt-2 font-sans font-light text-grey-700">{{$project->client}}</p>
             </div>
             <div class="flex justify-center pb-3 text-grey-dark">
                 @if (auth()->user()->usertype == 'admin')
-                <form action="{{route('projects.destroy', $proyect)}}" method="POST" novalidate class="delete-form">
+                <form action="{{route('projects.destroy', $project)}}" method="POST" novalidate class="delete-form">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full">
                         Eliminar proyecto
                     </button>
                 </form>
-                <form action="{{route('projects.edit', $proyect)}}" method="GET" novalidate>
+                <form action="{{route('projects.edit', $project)}}" method="GET" novalidate>
                     @csrf
                     <button type="submit" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full">
                         Editar proyecto

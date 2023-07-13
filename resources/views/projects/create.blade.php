@@ -19,7 +19,12 @@
                         {{session('create')}}
                     </p>
                 @endif
-
+                </form>
+                <div class="md:w-1/2 px-10">
+                        <form action="{{route('imagenes')}}" method="POST" enctype="multipart/form-data" id="dropzone" class="dropzone border-dashed border-2 w-full h-96 rounded flex flex-col justify-center items-center">
+                            @csrf
+                        </form>
+                </div>
                 <form action="{{route('projects')}}" class="w-full" method="POST" novalidate>
                     @csrf
                     <div class="flex flex-wrap -mx-3">
@@ -27,7 +32,7 @@
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="name">
                                 Nombre del proyecto
                             </label>
-                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600
                             @error('name')
                                 border-red-500
                             @enderror"
@@ -48,7 +53,7 @@
                                 border-red-500
                             @enderror"
                             value="{{old('client')}}"  id="client" name="client" type="text" placeholder="Cliente" required>
-                            @error('Cliente')
+                            @error('client')
                                 <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                                     {{$message}}
                                 </p>
@@ -113,6 +118,7 @@
                                 border-red-500
                             @enderror"
                             id="priority" name="priority" required>
+                                <option value="">Seleccione una opcion</option>
                                 <option value="alto" @if(old('priority') == 'alto') selected @endif>Alto</option>
                                 <option value="medio" @if(old('priority') == 'medio') selected @endif>Medio</option>
                                 <option value="bajo" @if(old('priority') == 'bajo') selected @endif>Bajo</option>
@@ -128,7 +134,7 @@
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="admin">
                                 Administrador
                             </label>
-                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600
                             @error('admin')
                                 border-red-500
                             @enderror"
@@ -144,7 +150,7 @@
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="collaborator">
                                 Colaborador
                             </label>
-                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600
                             @error('collaborator')
                                 border-red-500
                             @enderror"
@@ -161,7 +167,7 @@
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="collaborator">
                                 Decripción
                             </label>
-                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600
                             @error('description')
                                 border-red-500
                             @enderror"
@@ -173,12 +179,18 @@
                             @enderror
                         </div>
 
+                        <br/>
 
-                        <form action="{{ route('imagenes') }}" method="POST" enctype="multipart/form-data" id="my-dropzone" class="dropzone mb-4">
-                            <div class="fallback">
-                                <input name="file" type="file" multiple />
-                            </div>
-                        </form>
+                                       <!-- Creamos un campo oculto para guardar el valor de la imagen -->
+                        <div class="mb-5">
+                            <input type="hidden" name="file" value="{{old('file')}}"/>
+                            @error('file')
+                                <p class="bg-red-500 text-white my-2 rounded-lg text-center">
+                                    {{$message}}
+                                </p>
+                            @enderror
+                        </div>
+
 
                         <div class="flex justify-center mt-4">
                             <button type="submit" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full">
@@ -189,8 +201,7 @@
                                 Regresar
                             </a>
                         </div>
-
-        </div>
+            </div>
     </div>
     <!--/Grid Form-->
 </div>

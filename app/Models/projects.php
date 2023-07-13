@@ -9,21 +9,17 @@ class Projects extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'id',
-        'client',
-        'name',
-        'start_date',
-        'end_date',
-        'price',
-        'priority',
-        'admin',
-        'collaborator',
-        'file',
-    ];
+        // Campos que se pueden modificar
+        protected $fillable = [
+            'name',
+            'client',
+            'start_date',
+            'end_date',
+            'price',
+            'priority',
+            'admin',
+            'collaborator',
+            'description',
+            'file',
+        ];
 }

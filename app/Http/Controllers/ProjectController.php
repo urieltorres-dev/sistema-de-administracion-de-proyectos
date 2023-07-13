@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\projects;
+use App\Models\Projects;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -16,7 +16,7 @@ class ProjectController extends Controller
     public function index()
     {
         // Obtener todos los proyectos
-        $projects = projects::all();
+        $projects = Projects::all();
 
         // Regresar la vista de proyectos
         return view('projects', [
@@ -58,11 +58,10 @@ class ProjectController extends Controller
             'collaborator' => 'required',
             'description' => 'required',
             'file' => 'nullable|array',
-            'file.*' => 'file|mimes:doc,docx,pdf,jpg,jpeg,png|max:2048',
         ]);
 
         // Creación de un nuevo proyecto
-        $project = projects::create([
+        $project = Projects::create([
             'name' => $request->name,
             'client' => $request->client,
             'start_date' => $request->start_date,
@@ -72,25 +71,46 @@ class ProjectController extends Controller
             'admin' => $request->admin,
             'collaborator' => $request->collaborator,
             'description' => $request-> description,
-
+            'file' => $request-> file,
         ]);
-
-        // Manejo de archivos
-        if ($request->hasFile('files')) {
-            $files = $request->file('files');
-            foreach ($files as $file) {
-                $filename = time() . '_' . $file->getClientOriginalName();
-                $file->storeAs('public/uploads', $filename);
-                $project->files()->create([
-                    'filename' => $filename,
-                ]);
-            }
-        }
 
         // Regresar al formulario de creación de proyectos con un mensaje de éxito
         return back()->with('create', '¡Registro exitoso!');
     }
+
+
+    //Agregar el funcionamiento de agregar un proyecto
     
-    // Resto de métodos del controlador...
+       // Función para eliminar un proyecto
+       public function destroy(Projects $project)
+       {
+           // Verificar si el usuario es administrador
+           if (auth()->user()->usertype != 'admin') {
+               // Regresar a la vista de colaboradores con un mensaje de error
+               return back()->with('error', '¡No tienes permiso para realizar esta acción!');
+           }
+   
+           // Eliminar el colaborador
+           $project->delete();
+   
+           // Regresamos a la vista de colaboradores con un mensaje de éxito
+           return back()->with('delete', '¡Eliminación exitosa!');
+       }
+   
+    //    // Función para mostrar la vista con el formulario de edición de colaboradores
+    //    public function edit(User $collaborator)
+    //    {
+    //        // Verificar si el usuario es administrador
+    //        if (auth()->user()->usertype != 'admin') {
+    //            // Regresar a la vista de colaboradores con un mensaje de error
+    //            return back()->with('error', '¡No tienes permiso para realizar esta acción!');
+    //        }
+    //        // Regresar la vista de edición de colaboradores
+    //        return view('collaborators.edit', [
+    //            'collaborator' => $collaborator,
+    //        ]);
+    //    }
+   
+    
 }
 ?>

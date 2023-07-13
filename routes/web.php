@@ -102,15 +102,5 @@ Route::put('/projects/{project}', [ProjectController::class, 'update'])->name('p
 /*
  *   Rutas para las imagenes
 */
-// Ruta para regresar la vista de proyectos
-Route::get('/imagenes', [ProjectController::class, 'index'])->name('imagenes');
 // Ruta para enviar datos al servidor y crear un nuevo proyecto
-Route::post('/imagenes', [ProjectController::class, 'store']);
-// Ruta para regresaer la vista con el formulario de creación de proyectos
-Route::get('/imagenes/create', [ProjectController::class, 'create'])->name('imagenes.create');
-// Ruta para eliminar un proyecto
-Route::delete('/imagenes/{imagen}', [ProjectController::class, 'destroy'])->name('imagenes.destroy');
-// Ruta para regresar la vista de edición de proyectos
-Route::get('/imagenes/{imagen}/edit', [ProjectController::class, 'edit'])->name('imagenes.edit');
-// Ruta para enviar datos al servidor y actualizar un proyecto
-Route::put('/imagenes/{imagen}', [ProjectController::class, 'update'])->name('imagenes.update');
+Route::post('/imagenes', [ImagenController::class, 'store'])->name('imagenes');

@@ -1,9 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
-
 
 class ImagenController extends Controller
 {
@@ -17,7 +16,8 @@ class ImagenController extends Controller
         //Generar un ID úcico para cargarse al server
         $nombreFile = Str::uuid().'.'.$file->extension();
 
-        $fileServidor = Storage::make($imagen);
+        //Utilizaremos Intervention Image para modificación de imagen
+        $fileServidor = Storage::make($file);
 
         //Agregamos efectos a la imagen
         $fileServidor->fit(1000, 1000);
