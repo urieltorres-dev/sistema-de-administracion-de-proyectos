@@ -58,7 +58,9 @@
         </div>
 
         <div class="mt-4 items-center justify-between">
-          <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="submit">Iniciar secion</button>
+          <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="submit">
+            Iniciar sesión
+          </button>
         </div>
         
         <a class="inline-block right-0 align-baseline font-bold text-sm text-500 hover:text-blue-800" href="{{route('register')}}">

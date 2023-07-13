@@ -53,9 +53,9 @@ class CollaboratorController extends Controller
             'name' => 'required|min:4|max:20',
             'lastname' => 'required|min:4|max:20',
             'email' => 'required|email|unique:users|max:60',
-            'phone' => 'numeric|unique:users',
-            'job' => 'required|min:4|max:20',
-            'company' => 'required|min:4|max:100',
+            'phone' => 'nullable|unique:users',
+            'job' => 'nullable|min:4|max:20',
+            'company' => 'nullable|min:4|max:100',
             'password' => 'required|confirmed|min:6',
         ]);
 
@@ -119,9 +119,9 @@ class CollaboratorController extends Controller
             'name' => 'required|min:4|max:20',
             'lastname' => 'required|min:4|max:20',
             'email' => 'required|email|max:60',
-            'phone' => 'required|numeric',
-            'job' => 'required|min:4|max:20',
-            'company' => 'required|min:4|max:20',
+            'phone' => 'nullable|numeric',
+            'job' => 'nullable|min:4|max:20',
+            'company' => 'nullable|min:4|max:20',
             'password' => 'nullable|confirmed|',
         ]);
 
