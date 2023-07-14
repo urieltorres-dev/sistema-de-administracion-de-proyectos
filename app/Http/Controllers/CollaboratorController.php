@@ -49,10 +49,10 @@ class CollaboratorController extends Controller
         }
 
         // Validación de datos
-        $this->validate($request, [
+        $this->validate($request,[
             'name' => 'required|min:4|max:20',
             'lastname' => 'required|min:4|max:20',
-            'email' => 'required|email|unique:users|max:60',
+            'email' => 'required|unique:users|email|max:60',
             'phone' => 'nullable|unique:users',
             'job' => 'nullable|min:4|max:20',
             'company' => 'nullable|min:4|max:100',
@@ -99,6 +99,7 @@ class CollaboratorController extends Controller
             // Regresar a la vista de colaboradores con un mensaje de error
             return back()->with('error', '¡No tienes permiso para realizar esta acción!');
         }
+        
         // Regresar la vista de edición de colaboradores
         return view('collaborators.edit', [
             'collaborator' => $collaborator,
@@ -122,7 +123,7 @@ class CollaboratorController extends Controller
             'phone' => 'nullable|numeric',
             'job' => 'nullable|min:4|max:20',
             'company' => 'nullable|min:4|max:20',
-            'password' => 'nullable|confirmed|',
+            'password' => 'nullable|confirmed',
         ]);
 
         // Obtener los datos a actualizar

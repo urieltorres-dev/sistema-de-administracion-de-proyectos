@@ -1,8 +1,8 @@
 <?php
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class ImagenController extends Controller
 {
@@ -10,24 +10,14 @@ class ImagenController extends Controller
     public function store(Request $request){
         //Identificar el archivo que se sube en dropzone
         $file = $request->file('file');
-        //Convertir el array de la imagen a formato Json
-        //return response()->json(['imagen' => $imagen->extension()]);
 
         //Generar un ID úcico para cargarse al server
         $nombreFile = Str::uuid().'.'.$file->extension();
 
-        //Utilizaremos Intervention Image para modificación de imagen
-        $fileServidor = Storage::make($file);
-
-        //Agregamos efectos a la imagen
-        $fileServidor->fit(1000, 1000);
-
-        //Movemos la imagen de memoria (Contenedor Dropzone) a una ubicación fisica del server
-        //La guardamos en "public/uploads"
-        $filePath = public_path('uploads').'/'.$nombreFile;
-        $fileServidor->save($filePath);
+        //Redimensionar la imagen
+        $file->move(public_path('uploads'), $nombreFile);
 
         //Verificar que el nombre del archivo sea único
-        return response()->json(['imagen' => $nombreFile]);
+        return response()->json(['file' => $nombreFile]);
     }
 }

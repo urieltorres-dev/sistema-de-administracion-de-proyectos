@@ -4,6 +4,11 @@
     Registrar proyecto
 @endsection
 
+@section('styles')
+    <!--Insertar estilo de dropzone-->
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+@endsection
+
 @section('contenido')
 <div class="flex flex-col">
     <!--Grid Form-->
@@ -19,12 +24,9 @@
                         {{session('create')}}
                     </p>
                 @endif
-                </form>
-                <div class="md:w-1/2 px-10">
-                        <form action="{{route('imagenes')}}" method="POST" enctype="multipart/form-data" id="dropzone" class="dropzone border-dashed border-2 w-full h-96 rounded flex flex-col justify-center items-center">
-                            @csrf
-                        </form>
-                </div>
+            
+                
+
                 <form action="{{route('projects')}}" class="w-full" method="POST" novalidate>
                     @csrf
                     <div class="flex flex-wrap -mx-3">
@@ -91,7 +93,6 @@
                             @enderror
                         </div>
 
-
                         <div class="w-full md:w-1/2 px-3">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="price">
                                 Precio
@@ -107,7 +108,6 @@
                                 </p>
                             @enderror
                         </div>
-
 
                         <div class="w-full md:w-1/2 px-3">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="priority">
@@ -162,8 +162,7 @@
                             @enderror
                         </div>
 
-
-                        <div class="w-full md:w-1/2 px-3 mb-4">
+                        <div class="w-full px-3">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="collaborator">
                                 Decripción
                             </label>
@@ -171,7 +170,7 @@
                             @error('description')
                                 border-red-500
                             @enderror"
-                            value="{{old('description')}}"  id="description" name="description" type="text" placeholder="Descripcion breve" required>
+                            value="{{old('description')}}"  id="description" name="description" type="textarea" placeholder="Descripcion breve" required>
                             @error('description')
                                 <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                                     {{$message}}
@@ -179,9 +178,7 @@
                             @enderror
                         </div>
 
-                        <br/>
-
-                                       <!-- Creamos un campo oculto para guardar el valor de la imagen -->
+                        <!-- Creamos un campo oculto para guardar el valor de la imagen -->
                         <div class="mb-5">
                             <input type="hidden" name="file" value="{{old('file')}}"/>
                             @error('file')
@@ -191,17 +188,23 @@
                             @enderror
                         </div>
 
+                        <input type="submit" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full" value="Guardar proyecto"/>
 
-                        <div class="flex justify-center mt-4">
-                            <button type="submit" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full">
-                                Guardar proyecto
-                            </button>
+                        <a href="{{route('projects')}}" class="bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-4 rounded-full ml-4">
+                            Regresar
+                        </a>
+                    </div>
+                </form>
 
-                            <a href="{{route('projects')}}" class="bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-4 rounded-full ml-4">
-                                Regresar
-                            </a>
-                        </div>
+                <div class="md:w-1/2 px-10 pt-5">
+                    <form action="{{route('imagenes')}}" method="POST" enctype="multipart/form-data" id="dropzone" class="dropzone border-dashed border-2 w-full h-96 rounded flex flex-col justify-center items-center">
+                        @csrf
+                        
+                    </form>
+                </div>
+                
             </div>
+        </div>
     </div>
     <!--/Grid Form-->
 </div>

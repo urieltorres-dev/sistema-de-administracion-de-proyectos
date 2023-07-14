@@ -9,9 +9,7 @@
         @vite('resources/css/app.css')
         @vite('resources/js/app.js')
 
-        
-        <!--Insertar estilo de dropzone-->
-        <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+        @yield('styles')
 
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i,700,700i" rel="stylesheet">
 
@@ -67,6 +65,7 @@
                                     <span><i class="fas fa-angle-right float-right"></i></span>
                                 </a>
                             </li>
+                            @if (auth()->user()->usertype == 'admin')
                             <li class="w-full h-full py-3 px-2 border-b border-light-border">
                                 <a href="{{route('clients')}}"
                                 class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
@@ -75,6 +74,8 @@
                                     <span><i class="fa fa-angle-right float-right"></i></span>
                                 </a>
                             </li>
+                            @endif
+                            @if (auth()->user()->usertype == 'admin')
                             <li class="w-full h-full py-3 px-2 border-b border-light-border">
                                 <a href="{{route('collaborators')}}"
                                 class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
@@ -83,8 +84,9 @@
                                     <span><i class="fa fa-angle-right float-right"></i></span>
                                 </a>
                             </li>
+                            @endif
                             <li class="w-full h-full py-3 px-2 border-b border-light-border">
-                                <a href="{{'projects'}}"
+                                <a href="{{route('projects')}}"
                                     class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
                                     <i class="fas fa-table float-left mx-2"></i>
                                     Proyectos

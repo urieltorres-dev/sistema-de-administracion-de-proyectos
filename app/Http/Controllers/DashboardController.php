@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Client;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -15,6 +18,22 @@ class DashboardController extends Controller
     // Función para mostrar la vista del dashboard
     public function index()
     {
-        return view('dashboard');
+        // Obtener todos los usuarios colaboradores
+        $collaboratorsCount = User::where('usertype', 'collaborator')->count();
+        // Obtener todos los clientes
+        $clientsCount = Client::count();
+        // Obtener todos los proyectos
+        $projectsCount = Project::count();
+
+        // Obtener todos los proyectos
+        $projects = Project::all();
+
+        // Retornar la vista
+        return view('dashboard', [
+            'collaboratorsCount' => $collaboratorsCount,
+            'clientsCount' => $clientsCount,
+            'projectsCount' => $projectsCount,
+            'projects' => $projects,
+        ]);
     }
 }

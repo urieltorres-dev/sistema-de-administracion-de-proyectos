@@ -9,17 +9,17 @@ const dropzone = new Dropzone('#dropzone',{
     acceptedFiles: ".png,.jpg,.jpeg,.gif,.pdf",
     addRemoveLinks: true,
     dictRemoveFile: "Borrar archivo",
-    maxFiles: 100,
+    maxFiles: 1,
     uploadMultiple: false,
     //Trabajado con imagen en el contenedor de Dropzone
     init: function(){
         if(document.querySelector('[name="file"]').value.trim()){
-            const file_upload= {};
-            file_upload.size = 1000;
-            file_upload.name = document.querySelector('[name="file"]').value;
-            this.options.addedfile.call(this, file_upload);
-            this.options.thumbnail.call(this, file_upload, '/uploads/${file_upload.name}');
-            file_upload.previewElement.classList.add('dz-success', 'dz-complete');
+            const fileUpload= {};
+            fileUpload.size = 1234;
+            fileUpload.name = document.querySelector('[name="file"]').value;
+            this.options.addedfile.call(this, fileUpload);
+            this.options.thumbnail.call(this, fileUpload, '/uploads/${fileUpload.name}');
+            fileUpload.previewElement.classList.add('dz-success', 'dz-complete');
         }
     }
 });
@@ -32,7 +32,7 @@ const dropzone = new Dropzone('#dropzone',{
 
 //1. Envío correcto de la imagen
 dropzone.on('success', function(file, response){
-    document.querySelector('[name="file"]').value = response.imagen;
+    document.querySelector('[name="file"]').value = response.file;
 });
 
 //2. Evento de envío con error

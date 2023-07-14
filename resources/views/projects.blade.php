@@ -10,9 +10,11 @@
     <div class="rounded overflow-hidden shadow bg-white mx-2 w-full">
         <div class="px-6 py-2 border-b border-light-grey flex justify-between items-center">
             <div class="font-bold text-xl">Proyectos</div>
+            @if (auth()->user()->usertype == 'admin')
             <a href="{{route('projects.create')}}" class="bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full">
                 Agregar proyecto
             </a>
+            @endif
         </div>
     </div>
 
@@ -24,6 +26,7 @@
             <div class="text-center px-3 pb-6 pt-2">
                 <h3 class="text-black text-sm bold font-sans">{{$project->name}}</h3>
                 <p class="mt-2 font-sans font-light text-grey-700">{{$project->client}}</p>
+                <p class="mt-2 font-sans font-light text-grey-700">{{$project->description}}</p>
             </div>
             <div class="flex justify-center pb-3 text-grey-dark">
                 @if (auth()->user()->usertype == 'admin')

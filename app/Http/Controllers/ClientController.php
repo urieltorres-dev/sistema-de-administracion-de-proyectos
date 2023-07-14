@@ -93,6 +93,7 @@ class ClientController extends Controller
             // Regresar a la vista de clientes con un mensaje de error
             return back()->with('error', '¡No tienes permiso para realizar esta acción!');
         }
+        
         // Regresamos la vista de edición de clientes
         return view('clients.edit', [
             'client' => $client,
