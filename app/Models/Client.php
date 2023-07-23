@@ -17,4 +17,9 @@ class Client extends Model
         'phone',
         'company',
     ];
+
+    // Relación uno a muchos con la tabla projects
+    public function projects(){
+        return $this->hasMany(Project::class, 'client');
+    }
 }

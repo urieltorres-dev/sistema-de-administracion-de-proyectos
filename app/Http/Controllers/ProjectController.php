@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\User;
+use App\Models\Client;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
@@ -17,10 +19,18 @@ class ProjectController extends Controller
     {
         // Obtener todos los proyectos
         $projects = Project::all();
-
+        // Obtener todos los clientes
+        $clients = Client::all();
+        // Obtenemos los proyectos en el que el colaborador está asignado
+        $projects_collaborator = [];
+        if (auth()->user()->usertype === 'collaborator') {
+            $projects_collaborator = auth()->user()->collaborators;
+        }
         // Regresar la vista de proyectos
         return view('projects', [
             'projects' => $projects,
+            'clients' => $clients,
+            'projects_collaborator' => $projects_collaborator,
         ]);
     }
 
@@ -33,8 +43,19 @@ class ProjectController extends Controller
             return back()->with('error', '¡No tienes permiso para realizar esta acción!');
         }
 
+        // Obtener todos los admins
+        $admins = User::where('usertype', 'admin')->get();
+        // Obtener todos los colaboradores
+        $collaborators = User::where('usertype', 'collaborator')->get();
+        // Obtener todos los clientes
+        $clients = Client::all();
+
         // Regresar la vista de creación de proyectos
-        return view('projects.create');
+        return view('projects.create', [
+            'admins' => $admins,
+            'collaborators' => $collaborators,
+            'clients' => $clients,
+        ]);
     }
 
     // Función para enviar datos al servidor y crear un nuevo proyecto
@@ -49,19 +70,19 @@ class ProjectController extends Controller
         // Validación de datos
         $this->validate($request, [
             'name' => 'required|min:4|max:100',
-            'client' => 'required|min:4|max:100',
+            'client' => 'required',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
             'price' => 'required|numeric',
             'priority' => 'required|min:4|max:100',
             'admin' => 'required',
-            'collaborator' => 'required',
+            'collaborators' => 'required|array|min:1',
             'description' => 'required',
-            'file' => 'nullable',
+            'file' => 'required',
         ]);
 
         // Creación de un nuevo proyecto
-        Project::create([
+        $project = Project::create([
             'name' => $request->name,
             'client' => $request->client,
             'start_date' => $request->start_date,
@@ -69,10 +90,13 @@ class ProjectController extends Controller
             'price' => $request->price,
             'priority' => $request->priority,
             'admin' => $request->admin,
-            'collaborator' => $request->collaborator,
             'description' => $request->description,
             'file' => $request->file,
         ]);
+
+        // Asignar los colaboradores seleccionados al proyecto
+        $collaborators = $request->input('collaborators', []);
+        $project->collaborators()->attach($collaborators);
 
         // Regresar al formulario de creación de proyectos con un mensaje de éxito
         return back()->with('create', '¡Registro exitoso!');
@@ -83,14 +107,25 @@ class ProjectController extends Controller
     {
         // Verificar si el usuario es administrador
         if (auth()->user()->usertype != 'admin') {
-            // Regresar a la vista de colaboradores con un mensaje de error
+            // Regresar a la vista de proyectos con un mensaje de error
             return back()->with('error', '¡No tienes permiso para realizar esta acción!');
         }
 
-        // Eliminar el colaborador
+        // Eliminamos el archivo del servidor
+        $path = public_path('uploads'). '/' .$project->file;
+        // Verificamos si el archivo existe
+        if(file_exists($path)){
+            // Eliminamos el archivo
+            unlink($path);
+        }else{
+            // Si el archivo no existe, regresamos a la vista de proyectos con un mensaje de error
+            return back()->with('error', '¡El archivo no existe!');
+        }
+
+        // Eliminar el proyecto
         $project->delete();
 
-        // Regresamos a la vista de colaboradores con un mensaje de éxito
+        // Regresamos a la vista de proyectos con un mensaje de éxito
         return back()->with('delete', '¡Eliminación exitosa!');
     }
 
@@ -103,9 +138,19 @@ class ProjectController extends Controller
             return back()->with('error', '¡No tienes permiso para realizar esta acción!');
         }
 
+        // Obtener todos los admins
+        $admins = User::where('usertype', 'admin')->get();
+        // Obtener todos los colaboradores
+        $collaborators = User::where('usertype', 'collaborator')->get();
+        // Obtener todos los clientes
+        $clients = Client::all();
+
         // Regresar la vista de edición de proyectos
         return view('projects.edit', [
             'project' => $project,
+            'admins' => $admins,
+            'collaborators' => $collaborators,
+            'clients' => $clients,
         ]);
     }
 
@@ -121,15 +166,15 @@ class ProjectController extends Controller
         // Validación de datos
         $this->validate($request, [
             'name' => 'required|min:4|max:100',
-            'client' => 'required|min:4|max:100',
+            'client' => 'required',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
             'price' => 'required|numeric',
             'priority' => 'required|min:4|max:100',
             'admin' => 'required',
-            'collaborator' => 'required',
+            'collaborators' => 'required|array|min:1',
             'description' => 'required',
-            'file' => 'nullable|',
+            'file' => 'required',
         ]);
 
         // Actualización de un proyecto
@@ -141,10 +186,15 @@ class ProjectController extends Controller
             'price' => $request->price,
             'priority' => $request->priority,
             'admin' => $request->admin,
-            'collaborator' => $request->collaborator,
             'description' => $request->description,
             'file' => $request->file,
         ]);
+
+        // Eliminar los colaboradores anteriores del proyecto
+        $project->collaborators()->detach();
+        // Asignar los colaboradores seleccionados al proyecto
+        $collaborators = $request->input('collaborators', []);
+        $project->collaborators()->attach($collaborators);
 
         // Regresar a la vista de proyectos con un mensaje de éxito
         return redirect()->route('projects')->with('update', '¡Actualización exitosa!');

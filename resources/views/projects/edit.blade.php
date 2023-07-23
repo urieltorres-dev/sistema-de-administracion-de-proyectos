@@ -37,7 +37,7 @@
                             @error('name')
                                 border-red-500
                             @enderror"
-                            value="{{$project->name}}"  id="name" name="name" type="text" placeholder="Nombre" required>
+                            value="{{old('name', $project->name)}}" id="name" name="name" type="text" placeholder="Nombre" required>
                             @error('name')
                                 <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                                     {{$message}}
@@ -49,17 +49,23 @@
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="lastname">
                                 Cliente
                             </label>
-                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600
+                            <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600
                             @error('client')
                                 border-red-500
                             @enderror"
-                            value="{{$project->client}}"  id="client" name="client" type="text" placeholder="Cliente" required>
+                            id="client" name="client" required>
+                                <option value="">Seleccione una opcion</option>
+                                @foreach ($clients as $client)
+                                    <option value="{{ $client->id }}" @if($project->client == $client->id) selected @endif>{{ $client->name }}</option>
+                                @endforeach
+                            </select>
                             @error('client')
                                 <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                                     {{$message}}
                                 </p>
                             @enderror
                         </div>
+
                         <div class="w-full md:w-1/2 px-3 md:mb-0">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="start_date">
                                 Fecha de inicio
@@ -68,7 +74,7 @@
                             @error('start_date')
                                 border-red-500
                             @enderror"
-                            value="{{$project->start_date}}"  id="start_date" name="start_date" type="date" required>
+                            value="{{old('start_date', $project->start_date)}}" id="start_date" name="start_date" type="date" required>
                             @error('start_date')
                                 <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                                     {{$message}}
@@ -84,14 +90,13 @@
                             @error('end_date')
                                 border-red-500
                             @enderror"
-                            value="{{$project->end_date}}"  id="end_date" name="end_date" type="date" required>
+                            value="{{old('end_date', $project->end_date)}}" id="end_date" name="end_date" type="date" required>
                             @error('end_date')
                                 <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                                     {{$message}}
                                 </p>
                             @enderror
                         </div>
-
 
                         <div class="w-full md:w-1/2 px-3">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="price">
@@ -101,14 +106,13 @@
                             @error('price')
                                 border-red-500
                             @enderror"
-                            value="{{$project->price}}"  id="price" name="price" type="text" placeholder="Precio" pattern="^\d+(\.\d{1,2})?$" inputmode="decimal" required>
+                            value="{{old('price', $project->price)}}" id="price" name="price" type="text" placeholder="Precio" pattern="^\d+(\.\d{1,2})?$" inputmode="decimal" required>
                             @error('price')
                                 <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                                     {{$message}}
                                 </p>
                             @enderror
                         </div>
-
 
                         <div class="w-full md:w-1/2 px-3">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="priority">
@@ -120,9 +124,9 @@
                             @enderror"
                             id="priority" name="priority" required>
                                 <option value="">Seleccione una opcion</option>
-                                <option value="alto" @if($project->priority == 'alto') selected @endif>Alto</option>
-                                <option value="medio" @if($project->priority == 'medio') selected @endif>Medio</option>
-                                <option value="bajo" @if($project->priority == 'bajo') selected @endif>Bajo</option>
+                                <option value="Alto" @if($project->priority == 'Alto') selected @endif>Alto</option>
+                                <option value="Medio" @if($project->priority == 'Medio') selected @endif>Medio</option>
+                                <option value="Bajo" @if($project->priority == 'Bajo') selected @endif>Bajo</option>
                             </select>
                             @error('priority')
                                 <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
@@ -133,13 +137,18 @@
 
                         <div class="w-full md:w-1/2 px-3">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="admin">
-                                Administrador
+                                Lider del proyecto
                             </label>
-                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600
+                            <select class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600
                             @error('admin')
                                 border-red-500
                             @enderror"
-                            value="{{$project->admin}}"  id="admin" name="admin" type="text" placeholder="Nombre del administrador" required>
+                            id="admin" name="admin" type="text" required>
+                                <option value="">Seleccione una opcion</option>
+                                @foreach ($admins as $admin)
+                                    <option value="{{ $admin->id }}" @if($project->admin == $admin->id) selected @endif>{{ $admin->name }}</option>
+                                @endforeach
+                            </select>
                             @error('admin')
                                 <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                                     {{$message}}
@@ -149,30 +158,13 @@
 
                         <div class="w-full md:w-1/2 px-3 mb-4">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="collaborator">
-                                Colaborador
-                            </label>
-                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600
-                            @error('collaborator')
-                                border-red-500
-                            @enderror"
-                            value="{{$project->collaborator}}"  id="collaborator" name="collaborator" type="text" placeholder="Nombre del colaborador" required>
-                            @error('collaborator')
-                                <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
-                                    {{$message}}
-                                </p>
-                            @enderror
-                        </div>
-
-
-                        <div class="w-full px-3">
-                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="collaborator">
                                 Decripción
                             </label>
                             <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600
                             @error('description')
                                 border-red-500
                             @enderror"
-                            value="{{$project->description}}"  id="description" name="description" type="textarea" placeholder="Descripcion breve" required>
+                            value="{{$project->description}}" id="description" name="description" type="textarea" placeholder="Descripcion breve" required>
                             @error('description')
                                 <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                                     {{$message}}
@@ -180,8 +172,24 @@
                             @enderror
                         </div>
 
+                        <!-- Lista de colaboradores con casillas de verificación -->
+                        <div class="mb-4">
+                            <p class="block text-gray-700 text-sm font-bold mb-2">Colaboradores del proyecto:</p>
+                            @foreach ($collaborators as $collaborator)
+                                <label class="inline-flex items-center mt-1">
+                                    <input type="checkbox" name="collaborators[]" value="{{ $collaborator->id }}"
+                                        @if(in_array($collaborator->id, old('collaborators', $project->collaborators->pluck('id')->toArray()))) checked @endif
+                                        class="form-checkbox h-4 w-4 text-blue-600">
+                                    <span class="ml-2">{{ $collaborator->name }}</span>
+                                </label>
+                            @endforeach
+                            @error('collaborators')
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+
                         <!-- Creamos un campo oculto para guardar el valor de la imagen -->
-                        <div class="mb-5">
+                        <div class="mb-5 px-3">
                             <input type="hidden" name="file" value="{{$project->file}}"/>
                             @error('file')
                                 <p class="bg-red-500 text-white my-2 rounded-lg text-center">
@@ -201,7 +209,7 @@
                 </form>
 
                 <div class="md:w-1/2 px-10 pt-5">
-                    <form action="{{route('imagenes')}}" method="POST" enctype="multipart/form-data" id="dropzone" class="dropzone border-dashed border-2 w-full h-96 rounded flex flex-col justify-center items-center">
+                    <form action="{{route('files.store')}}" method="POST" enctype="multipart/form-data" id="dropzone" class="dropzone border-dashed border-2 w-full h-96 rounded flex flex-col justify-center items-center">
                         @csrf
                     </form>
                 </div>

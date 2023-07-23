@@ -18,8 +18,23 @@ class Project extends Model
         'price',
         'priority',
         'admin',
-        'collaborator',
         'description',
         'file',
     ];
+
+    // Relación uno a muchos con la tabla clients
+    public function client(){
+        return $this->belongsTo(Client::class, 'client');
+    }
+
+    // Relación uno a muchos con la tabla users
+    public function admin(){
+        return $this->belongsTo(User::class, 'admin');
+    }
+
+    // Relación muchos a muchos con la tabla users a través de la tabla collaborator_project
+    public function collaborators()
+    {
+        return $this->belongsToMany(User::class, 'collaborator_project', 'project_id', 'collaborator_id');
+    }
 }

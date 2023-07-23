@@ -97,15 +97,4 @@ Swal.fire({
 });
 </script>
 @endif
-
-@if (session('error'))
-<script>
-Swal.fire({
-    title: '¡Error!',
-    text: 'Ha ocurrido un error.',
-    icon: 'error',
-    confirmButtonText: 'Aceptar'
-});
-</script>
-@endif
 @endsection

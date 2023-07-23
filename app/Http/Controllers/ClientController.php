@@ -52,7 +52,7 @@ class ClientController extends Controller
             'name' => 'required|min:4|max:20',
             'lastname' => 'required|min:4|max:20',
             'email' => 'required|email|unique:clients|max:60',
-            'phone' => 'required|numeric|unique:clients',
+            'phone' => 'required|unique:clients|size:10|regex:/^[0-9]{10}$/',
             'company' => 'required|min:4|max:100',
         ]);
 
@@ -114,7 +114,7 @@ class ClientController extends Controller
             'name' => 'required|min:4|max:20',
             'lastname' => 'required|min:4|max:20',
             'email' => 'required|email|max:60',
-            'phone' => 'required|numeric',
+            'phone' => 'required|size:10|regex:/^[0-9]{10}$/',
             'company' => 'required|min:4|max:100',
         ]);
 

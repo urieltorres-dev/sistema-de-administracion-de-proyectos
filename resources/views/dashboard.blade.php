@@ -56,7 +56,6 @@
     <!-- /Stats Row Ends Here -->
 
     <!--Grid Form-->
-
     <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2">
         <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
             <div class="bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b">
@@ -104,7 +103,50 @@
     </div>
     <!--/Grid Form-->
     @else
-    <p>Estas logueado como colaborador</p>
+    <!--Grid Form-->
+    <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2">
+        <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
+            <div class="bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b">
+                Proyectos recientes
+            </div>
+            <div class="p-3">
+                <table class="table-responsive w-full rounded">
+                    <thead>
+                        <tr>
+                            <th class="border w-1/4 px-4 py-2">Nombre del Proyecto</th>
+                            <th class="border w-1/6 px-4 py-2">Administrador</th>
+                            <th class="border w-1/6 px-4 py-2">Cliente</th>
+                            <th class="border w-1/6 px-4 py-2">Fecha de finalizacion</th>
+                            <th class="border w-1/7 px-4 py-2">Prioridad</th>
+                            <th class="border w-1/5 px-4 py-2">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($projects as $project)
+                        @if ($project->collaborators->contains(auth()->user()->id))                        
+                        <tr>
+                            <td class="border px-4 py-2">{{$project->name}}</td>
+                            <td class="border px-4 py-2">{{$project->admin}}</td>
+                            <td class="border px-4 py-2">{{$project->client}}</td>
+                            <td class="border px-4 py-2">{{$project->end_date}}</td>
+                            <td class="border px-4 py-2">
+                                {{$project->priority}}
+                                <!-- <i class="fas fa-check text-green-500 mx-2"></i>
+                                <i class="fas fa-times text-red-500 mx-2"></i> -->
+                            </td>
+                            <td class="border px-4 py-2">
+                                <a href="{{route('projects', $project)}}" class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
+                                        <i class="fas fa-eye"></i></a>
+                            </td>
+                        </tr>
+                        @endif
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--/Grid Form-->
     @endif
 </div>
 @endsection

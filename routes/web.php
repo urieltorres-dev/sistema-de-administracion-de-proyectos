@@ -8,7 +8,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CollaboratorController;
-use App\Http\Controllers\ImagenController;
+use App\Http\Controllers\FileController;
 
 
 /*
@@ -100,7 +100,10 @@ Route::put('/projects/{project}', [ProjectController::class, 'update'])->name('p
 
 
 /*
- *   Rutas para las imagenes
+ *   Rutas para los archivos
 */
 // Ruta para enviar datos al servidor y crear un nuevo proyecto
-Route::post('/imagenes', [ImagenController::class, 'store'])->name('imagenes');
+Route::post('/files', [FileController::class, 'store'])->name('files.store');
+// Ruta para eliminar un archivo
+Route::post('/files/destroy', [FileController::class, 'destroy'])->name('files.destroy');
+

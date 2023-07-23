@@ -115,5 +115,16 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.12/sweetalert2.min.js" integrity="sha512-JbRQ4jMeFl9Iem8w6WYJDcWQYNCEHP/LpOA11LaqnbJgDV6Y8oNB9Fx5Ekc5O37SwhgnNJdmnasdwiEdvMjW2Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
         @yield('scripts')
+
+        @if (session('error'))
+        <script>
+        Swal.fire({
+            title: '¡Error!',
+            text: 'Ha ocurrido un error.',
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+        });
+        </script>
+        @endif
     </body>
 </html>

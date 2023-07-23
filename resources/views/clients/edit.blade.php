@@ -32,7 +32,7 @@
                             @error('name')
                                 border-red-500
                             @enderror"
-                            value="{{$client->name}}"  id="name" name="name" type="text" placeholder="Nombre" required>
+                            value="{{old('name', $client->name)}}" id="name" name="name" type="text" placeholder="Nombre" required>
                             @error('name')
                                 <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                                     {{$message}}
@@ -48,7 +48,7 @@
                             @error('lastname')
                                 border-red-500
                             @enderror"
-                            value="{{$client->lastname}}"  id="lastname" name="lastname" type="text" placeholder="Apellido" required>
+                            value="{{old('lastname',$client->lastname)}}" id="lastname" name="lastname" type="text" placeholder="Apellido" required>
                             @error('lastname')
                                 <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                                     {{$message}}
@@ -64,7 +64,7 @@
                             @error('email')
                                 border-red-500
                             @enderror"
-                            value="{{$client->email}}"  id="email" name="email" type="email" placeholder="Correo electrónico" required>
+                            value="{{old('email', $client->email)}}" id="email" name="email" type="email" placeholder="Correo electrónico" required>
                             @error('email')
                                 <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                                     {{$message}}
@@ -80,7 +80,7 @@
                             @error('phone')
                                 border-red-500
                             @enderror"
-                            value="{{$client->phone}}"  id="phone" name="phone" type="tel" pattern="[0-9]{10}" placeholder="Numero de teléfono" required>
+                            value="{{old('phone', $client->phone)}}" id="phone" name="phone" type="tel" pattern="[0-9]{10}" placeholder="Numero de teléfono" required>
                             @error('phone')
                                 <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                                     {{$message}}
@@ -96,7 +96,7 @@
                             @error('company')
                                 border-red-500
                             @enderror"
-                            value="{{$client->company}}"  id="company" name="company" type="text" placeholder="Compañía" required>
+                            value="{{old('company', $client->company)}}" id="company" name="company" type="text" placeholder="Compañía" required>
                             @error('company')
                                 <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                                     {{$message}}

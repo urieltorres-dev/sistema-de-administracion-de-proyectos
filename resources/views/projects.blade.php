@@ -21,11 +21,16 @@
     <!--Profile Tabs-->
     <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 px-2 mt-2">
         @foreach ($projects as $project)
+        @if ($project->collaborators->contains(auth()->user()->id) || auth()->user()->usertype == 'admin')
         <!--Top user 1-->
         <div class="rounded rounded-t-lg overflow-hidden shadow max-w-xs">
             <div class="text-center px-3 pb-6 pt-2">
                 <h3 class="text-black text-sm bold font-sans">{{$project->name}}</h3>
-                <p class="mt-2 font-sans font-light text-grey-700">{{$project->client}}</p>
+                <p class="mt-2 font-sans font-light text-grey-700">@foreach ($clients as $client)
+                    @if ($client->id == $project->client)
+                        {{$client->name}}
+                    @endif
+                @endforeach</p>
                 <p class="mt-2 font-sans font-light text-grey-700">{{$project->description}}</p>
             </div>
             <div class="flex justify-center pb-3 text-grey-dark">
@@ -46,6 +51,7 @@
                 @endif
             </div>
         </div>
+        @endif
         @endforeach
     </div>
     <!--/Profile Tabs-->
@@ -91,17 +97,6 @@ Swal.fire({
     title: '¡Actualizado!',
     text: 'El proyecto ha sido actualizado.',
     icon: 'success',
-    confirmButtonText: 'Aceptar'
-});
-</script>
-@endif
-
-@if (session('error'))
-<script>
-Swal.fire({
-    title: '¡Error!',
-    text: 'Ha ocurrido un error.',
-    icon: 'error',
     confirmButtonText: 'Aceptar'
 });
 </script>

@@ -79,7 +79,7 @@
                             @error('phone')
                                 border-red-500
                             @enderror"
-                            value="{{old('phone')}}"  id="phone" name="phone" type="tel" pattern="[0-9]{10}" placeholder="Numero de teléfono" required>
+                            value="{{old('phone')}}" id="phone" name="phone" type="tel" pattern="[0-9]{10}" placeholder="Numero de teléfono" required>
                             @error('phone')
                                 <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                                     {{$message}}

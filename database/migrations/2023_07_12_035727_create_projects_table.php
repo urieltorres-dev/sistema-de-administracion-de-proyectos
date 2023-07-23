@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\Projects;
 
 return new class extends Migration
 {
@@ -15,14 +14,13 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('client');
+            $table->foreignId('client')->references('id')->on('clients')->onDelete('cascade');
             $table->date('start_date');
             $table->date('end_date');
             $table->decimal('price', 10, 2);
             $table->string('priority');
-            $table->string('admin');
-            $table->string('collaborator');
-            $table->string('description');
+            $table->foreignId('admin')->references('id')->on('users')->onDelete('cascade');
+            $table->text('description');
             $table->string('file')->nullable();;
             $table->timestamps();
         });

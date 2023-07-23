@@ -26,6 +26,7 @@ class User extends Authenticatable
         'phone',
         'job',
         'company',
+        'profilephoto',
     ];
 
     /**
@@ -47,4 +48,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // Relación uno a muchos con la tabla projects
+    public function projects(){
+        return $this->hasMany(Project::class, 'admin');
+    }
+
+    // Relación muchos a muchos con la tabla projects a través de la tabla collaborator_project
+    public function collaboratedProjects()
+    {
+        return $this->belongsToMany(Project::class, 'collaborator_project', 'collaborator_id', 'project_id');
+    }
 }
