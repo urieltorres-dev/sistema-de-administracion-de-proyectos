@@ -19,6 +19,7 @@ class Project extends Model
         'priority',
         'admin',
         'description',
+        'status',
         'file',
     ];
 
@@ -36,5 +37,13 @@ class Project extends Model
     public function collaborators()
     {
         return $this->belongsToMany(User::class, 'collaborator_project', 'project_id', 'collaborator_id');
+    }
+
+    // Función para obtener los pagos de los colaboradores
+    public function collaboratorPayments()
+    {
+        return $this->belongsToMany(User::class, 'collaborator_project' , 'project_id', 'collaborator_id')
+            ->withPivot('payment')
+            ->withTimestamps();
     }
 }

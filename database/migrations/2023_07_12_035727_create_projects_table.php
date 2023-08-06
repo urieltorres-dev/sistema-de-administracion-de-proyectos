@@ -21,7 +21,8 @@ return new class extends Migration
             $table->string('priority');
             $table->foreignId('admin')->references('id')->on('users')->onDelete('cascade');
             $table->text('description');
-            $table->string('file')->nullable();;
+            $table->string('status');
+            $table->string('file');
             $table->timestamps();
         });
     }

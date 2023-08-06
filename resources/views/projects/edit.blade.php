@@ -156,7 +156,28 @@
                             @enderror
                         </div>
 
-                        <div class="w-full md:w-1/2 px-3 mb-4">
+                        <div class="w-full md:w-1/2 px-3">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="status">
+                                Estado del proyecto
+                            </label>
+                            <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white-500 focus:border-gray-600
+                            @error('status')
+                                border-red-500
+                            @enderror"
+                            id="status" name="status" required>
+                                <option value="">Seleccione una opcion</option>
+                                <option value="Finalizado" @if($project->status == 'Finalizado') selected @endif>Finalizado</option>
+                                <option value="En curso" @if($project->status == 'En curso') selected @endif>En curso</option>
+                                <option value="Pendiente" @if($project->status == 'Pendiente') selected @endif>Pendiente</option>
+                            </select>
+                            @error('status')
+                                <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                                    {{$message}}
+                                </p>
+                            @enderror
+                        </div>
+
+                        <div class="w-full px-3 mb-4">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-light mb-1" for="collaborator">
                                 Decripción
                             </label>
@@ -175,14 +196,27 @@
                         <!-- Lista de colaboradores con casillas de verificación -->
                         <div class="mb-4">
                             <p class="block text-gray-700 text-sm font-bold mb-2">Colaboradores del proyecto:</p>
-                            @foreach ($collaborators as $collaborator)
-                                <label class="inline-flex items-center mt-1">
-                                    <input type="checkbox" name="collaborators[]" value="{{ $collaborator->id }}"
-                                        @if(in_array($collaborator->id, old('collaborators', $project->collaborators->pluck('id')->toArray()))) checked @endif
-                                        class="form-checkbox h-4 w-4 text-blue-600">
-                                    <span class="ml-2">{{ $collaborator->name }}</span>
-                                </label>
-                            @endforeach
+                            <div class="flex flex-col">
+                                @foreach ($collaborators as $collaborator)
+                                    <div class="flex items-center">
+                                        <div class="w-full md:w-1/2 px-3">
+                                            <label class="flex items-center">
+                                                <input type="checkbox" name="collaborators[]" value="{{ $collaborator->id }}"
+                                                    @if(in_array($collaborator->id, old('collaborators', $project->collaborators->pluck('id')->toArray()))) checked @endif
+                                                    class="form-checkbox h-4 w-4 text-blue-600">
+                                                <span class="ml-2">{{ $collaborator->name }}</span>
+                                            </label>
+                                        </div>
+                                        <div class="w-full md:w-1/2 px-3">
+                                            <input type="text" name="payment[{{ $collaborator->id }}]" id="pay_{{ $collaborator->id }}"
+                                                placeholder="Pago"
+                                                value="{{ old('payment.' . $collaborator->id, $project->collaboratorPayments->where('id', $collaborator->id)->first()->pivot->payment ?? '') }}"
+                                                @if(!in_array($collaborator->id, old('collaborators', $project->collaborators->pluck('id')->toArray()))) disabled @endif
+                                                class="ml-4 px-2 py-1 border rounded @if(in_array($collaborator->id, old('collaborators', $project->collaborators->pluck('id')->toArray()))) bg-white @else bg-gray-200 @endif">
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
                             @error('collaborators')
                                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                             @enderror
@@ -240,5 +274,18 @@
             }
         })
     });
+</script>
+
+<script>
+const collaborators = document.querySelectorAll('input[name="collaborators[]"]');
+collaborators.forEach((collaborator) => {
+    collaborator.addEventListener('change', (e) => {
+        const pay = document.querySelector(`#pay_${e.target.value}`);
+        pay.disabled = !e.target.checked;
+        pay.value = '';
+        pay.classList.toggle('bg-gray-200');
+        pay.classList.toggle('bg-white');
+    });
+});
 </script>
 @endsection

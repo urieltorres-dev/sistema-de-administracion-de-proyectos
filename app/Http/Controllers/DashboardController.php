@@ -24,9 +24,12 @@ class DashboardController extends Controller
         $clientsCount = Client::count();
         // Obtener todos los proyectos
         $projectsCount = Project::count();
-
         // Obtener todos los proyectos
         $projects = Project::all();
+        // Obtenemos a todos los uauarios
+        $users = User::all();
+        // Obtenemos a todos los clientes
+        $clients = Client::all();
 
         // Retornar la vista
         return view('dashboard', [
@@ -34,6 +37,8 @@ class DashboardController extends Controller
             'clientsCount' => $clientsCount,
             'projectsCount' => $projectsCount,
             'projects' => $projects,
+            'users' => $users,
+            'clients' => $clients,
         ]);
     }
 }

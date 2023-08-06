@@ -78,6 +78,8 @@ class ProjectController extends Controller
             'admin' => 'required',
             'collaborators' => 'required|array|min:1',
             'description' => 'required',
+            'payment' => 'required|array|min:1',
+            'status' => 'required',
             'file' => 'required',
         ]);
 
@@ -91,12 +93,19 @@ class ProjectController extends Controller
             'priority' => $request->priority,
             'admin' => $request->admin,
             'description' => $request->description,
+            'status' => $request->status,
             'file' => $request->file,
         ]);
 
         // Asignar los colaboradores seleccionados al proyecto
         $collaborators = $request->input('collaborators', []);
         $project->collaborators()->attach($collaborators);
+
+        // Guardar los pagos de los colaboradores
+        $payments = $request->input('payment', []);
+        foreach ($payments as $collaboratorId => $paymentAmount) {
+            $project->collaborators()->updateExistingPivot($collaboratorId, ['payment' => $paymentAmount]);
+        }
 
         // Regresar al formulario de creación de proyectos con un mensaje de éxito
         return back()->with('create', '¡Registro exitoso!');
@@ -174,6 +183,8 @@ class ProjectController extends Controller
             'admin' => 'required',
             'collaborators' => 'required|array|min:1',
             'description' => 'required',
+            'payment' => 'required|array|min:1',
+            'status' => 'required',
             'file' => 'required',
         ]);
 
@@ -187,14 +198,22 @@ class ProjectController extends Controller
             'priority' => $request->priority,
             'admin' => $request->admin,
             'description' => $request->description,
+            'status' => $request->status,
             'file' => $request->file,
         ]);
 
         // Eliminar los colaboradores anteriores del proyecto
         $project->collaborators()->detach();
+
         // Asignar los colaboradores seleccionados al proyecto
         $collaborators = $request->input('collaborators', []);
         $project->collaborators()->attach($collaborators);
+
+        // Guardar los pagos de los colaboradores
+        $payments = $request->input('payment', []);
+        foreach ($payments as $collaboratorId => $paymentAmount) {
+            $project->collaborators()->updateExistingPivot($collaboratorId, ['payment' => $paymentAmount]);
+        }
 
         // Regresar a la vista de proyectos con un mensaje de éxito
         return redirect()->route('projects')->with('update', '¡Actualización exitosa!');

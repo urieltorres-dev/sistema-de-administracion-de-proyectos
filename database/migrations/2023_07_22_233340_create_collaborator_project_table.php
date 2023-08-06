@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('collaborator_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('project_id')->references('id')->on('projects')->onDelete('cascade');
+            $table->decimal('payment', 10, 2)->nullable();
             $table->timestamps();
         });
     }

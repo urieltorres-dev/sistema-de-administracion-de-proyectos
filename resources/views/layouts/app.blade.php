@@ -42,7 +42,7 @@
                                 <li><form method="POST" action="{{route('logout')}}">
                                         @csrf
                                         <button type="submit" class="no-underline px-4 py-2 block text-black hover:bg-grey-light">
-                                            Cerrar secion
+                                            Cerrar sesión
                                         </button>
                                     </form>
                                 </li>
