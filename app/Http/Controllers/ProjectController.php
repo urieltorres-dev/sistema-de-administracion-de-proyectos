@@ -78,7 +78,7 @@ class ProjectController extends Controller
             'admin' => 'required',
             'collaborators' => 'required|array|min:1',
             'description' => 'required',
-            'payment' => 'required|array|min:1',
+            'payment' => 'required|array|min:1|numeric',
             'status' => 'required',
             'file' => 'required',
         ]);
@@ -108,7 +108,7 @@ class ProjectController extends Controller
         }
 
         // Regresar al formulario de creación de proyectos con un mensaje de éxito
-        return back()->with('create', '¡Registro exitoso!');
+        return redirect()->route('projects')->with('create', '¡Registro exitoso!');
     }
     
     // Función para eliminar un proyecto
@@ -183,7 +183,7 @@ class ProjectController extends Controller
             'admin' => 'required',
             'collaborators' => 'required|array|min:1',
             'description' => 'required',
-            'payment' => 'required|array|min:1',
+            'payment' => 'required|array|min:1|numeric',
             'status' => 'required',
             'file' => 'required',
         ]);
@@ -217,6 +217,25 @@ class ProjectController extends Controller
 
         // Regresar a la vista de proyectos con un mensaje de éxito
         return redirect()->route('projects')->with('update', '¡Actualización exitosa!');
+    }
+
+    // Función para mostrar la vista de detalles de un proyecto
+    public function show(Project $project)
+    {
+        // Obtener todos los admins
+        $admins = User::where('usertype', 'admin')->get();
+        // Obtener todos los colaboradores
+        $collaborators = User::where('usertype', 'collaborator')->get();
+        // Obtener todos los clientes
+        $clients = Client::all();
+
+        // Regresar la vista de detalles de un proyecto
+        return view('projects.show', [
+            'project' => $project,
+            'admins' => $admins,
+            'collaborators' => $collaborators,
+            'clients' => $clients,
+        ]);
     }
 }
 ?>

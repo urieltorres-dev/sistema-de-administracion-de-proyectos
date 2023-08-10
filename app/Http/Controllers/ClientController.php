@@ -66,7 +66,7 @@ class ClientController extends Controller
         ]);
 
         // Regresamos al formulario de creación de clientes con un mensaje de éxito
-        return back()->with('create', '¡Registro exitoso!');
+        return redirect()->route('clients')->with('create', '¡Registro exitoso!');
     }
 
     // Función para eliminar un cliente

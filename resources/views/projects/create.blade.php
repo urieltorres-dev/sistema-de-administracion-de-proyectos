@@ -208,7 +208,7 @@
                                         </div>
                                         <div class="w-full md:w-1/2 px-3">
                                             <input type="text" name="payment[{{ $collaborator->id }}]" id="pay_{{ $collaborator->id }}"
-                                                placeholder="Pago"
+                                                placeholder="Pago" pattern="^\d+(\.\d{1,2})?$" inputmode="decimal"
                                                 value="{{ old('payment.' . $collaborator->id) }}"
                                                 {{ old('collaborators') ? (in_array($collaborator->id, old('collaborators')) ? '' : 'disabled') : 'disabled' }}
                                                 class="ml-4 px-2 py-1 border rounded @if(old('collaborators') && in_array($collaborator->id, old('collaborators'))) bg-white @else bg-gray-200 @endif">
@@ -253,17 +253,6 @@
 @endsection
 
 @section('scripts')
-@if(session('create'))
-<script>
-Swal.fire({
-    title: '¡Registro exitoso!',
-    text: 'Proyecto guardado correctamente!',
-    icon: 'success',
-    confirmButtonText: 'Aceptar'
-});
-</script>
-@endif
-
 <script>
 const collaborators = document.querySelectorAll('input[name="collaborators[]"]');
 collaborators.forEach((collaborator) => {

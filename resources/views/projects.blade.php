@@ -25,7 +25,10 @@
         <!--Top user 1-->
         <div class="rounded rounded-t-lg overflow-hidden shadow max-w-xs">
             <div class="text-center px-3 pb-6 pt-2">
-                <h3 class="text-black text-sm bold font-sans">{{$project->name}}</h3>
+                <form action="{{route('projects.show', $project)}}" method="GET" novalidate>
+                    @csrf
+                    <button class="text-black text-sm bold font-sans">{{$project->name}}</button>
+                </form>
                 <p class="mt-2 font-sans font-light text-grey-700">@foreach ($clients as $client)
                     @if ($client->id == $project->client)
                         {{$client->name}}
@@ -79,6 +82,17 @@ $('.delete-form').submit(function(e) {
     })
 });
 </script>
+
+@if(session('create'))
+<script>
+Swal.fire({
+    title: '¡Registro exitoso!',
+    text: 'Proyecto guardado correctamente!',
+    icon: 'success',
+    confirmButtonText: 'Aceptar'
+});
+</script>
+@endif
 
 @if (session('destroy'))
 <script>

@@ -72,7 +72,7 @@ class CollaboratorController extends Controller
         ]);
 
         // Regresamos al formulario de creación de colaboradores con un mensaje de éxito
-        return back()->with('create', '¡Registro exitoso!');
+        return redirect()->route('collaborators')->with('create', '¡Registro exitoso!');
     }
 
     // Función para eliminar un colaborador

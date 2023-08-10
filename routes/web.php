@@ -97,6 +97,8 @@ Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->nam
 Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
 // Ruta para enviar datos al servidor y actualizar un proyecto
 Route::put('/projects/{project}', [ProjectController::class, 'update'])->name('projects.update');
+// Ruta para regresar la vista de un proyecto
+Route::get('/projects/{project}/show', [ProjectController::class, 'show'])->name('projects.show');
 
 
 /*

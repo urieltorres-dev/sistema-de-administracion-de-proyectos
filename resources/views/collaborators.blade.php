@@ -23,9 +23,6 @@
         @foreach ($collaborators as $collaborator)
         <!--Top user 1-->
         <div class="rounded rounded-t-lg overflow-hidden shadow max-w-xs">
-            <div class="flex justify-center -mt-8">
-                <img src="{{asset('img/usuario.svg')}}" alt="" class="rounded-full border-solid border-white border-2 -mt-3">
-            </div>
             <div class="text-center px-3 pb-6 pt-2">
                 <h3 class="text-black text-sm bold font-sans">{{$collaborator->name . ' ' . $collaborator->lastname}}</h3>
                 <p class="mt-2 font-sans font-light text-grey-700">{{$collaborator->job}}</p>
@@ -75,6 +72,17 @@ $('.delete-form').submit(function(e) {
     })
 });
 </script>
+
+@if(session('create'))
+<script>
+Swal.fire({
+    title: '¡Registro exitoso!',
+    text: '¡Cliente guardado correctamente!',
+    icon: 'success',
+    confirmButtonText: 'Aceptar'
+});
+</script>
+@endif
 
 @if (session('destroy'))
 <script>

@@ -89,12 +89,14 @@
                         @foreach ($projects as $project)
                         <tr>
                             <td class="border px-4 py-2">{{$project->name}}</td>
-                            <td class="border px-4 py-2">@foreach ($users as $user)
+                            <td class="border px-4 py-2">
+                            @foreach ($users as $user)
                                 @if ($user->id == $project->admin)
                                     {{$user->name}}
                                 @endif
                             @endforeach</td>
-                            <td class="border px-4 py-2">@foreach ($clients as $client)
+                            <td class="border px-4 py-2">
+                            @foreach ($clients as $client)
                                 @if ($client->id == $project->client)
                                     {{$client->name}}
                                 @endif
@@ -238,12 +240,14 @@
                         @if ($project->collaborators->contains(auth()->user()->id))                        
                         <tr>
                             <td class="border px-4 py-2">{{$project->name}}</td>
-                            <td class="border px-4 py-2">@foreach ($users as $user)
+                            <td class="border px-4 py-2">
+                            @foreach ($users as $user)
                                 @if ($user->id == $project->admin)
                                     {{$user->name}}
                                 @endif
                             @endforeach</td>
-                            <td class="border px-4 py-2">@foreach ($clients as $client)
+                            <td class="border px-4 py-2">
+                            @foreach ($clients as $client)
                                 @if ($client->id == $project->client)
                                     {{$client->name}}
                                 @endif

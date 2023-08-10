@@ -166,16 +166,3 @@
     <!--/Grid Form-->
 </div>
 @endsection
-
-@section('scripts')
-@if(session('create'))
-<script>
-Swal.fire({
-    title: '¡Registro exitoso!',
-    text: '¡Cliente guardado correctamente!',
-    icon: 'success',
-    confirmButtonText: 'Aceptar'
-});
-</script>
-@endif
-@endsection
