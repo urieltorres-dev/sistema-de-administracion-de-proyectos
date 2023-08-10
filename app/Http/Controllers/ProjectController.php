@@ -78,7 +78,7 @@ class ProjectController extends Controller
             'admin' => 'required',
             'collaborators' => 'required|array|min:1',
             'description' => 'required',
-            'payment' => 'required|array|min:1|numeric',
+            'payment' => 'required|array|min:1',
             'status' => 'required',
             'file' => 'required',
         ]);
@@ -183,7 +183,7 @@ class ProjectController extends Controller
             'admin' => 'required',
             'collaborators' => 'required|array|min:1',
             'description' => 'required',
-            'payment' => 'required|array|min:1|numeric',
+            'payment' => 'required|array|min:1',
             'status' => 'required',
             'file' => 'required',
         ]);
