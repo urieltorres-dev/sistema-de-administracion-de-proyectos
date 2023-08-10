@@ -43,18 +43,15 @@ class ProjectController extends Controller
             return back()->with('error', '¡No tienes permiso para realizar esta acción!');
         }
 
-        // Obtener todos los admins
-        $admins = User::where('usertype', 'admin')->get();
-        // Obtener todos los colaboradores
-        $collaborators = User::where('usertype', 'collaborator')->get();
         // Obtener todos los clientes
         $clients = Client::all();
+        // Obtener todos los usuarios
+        $users = User::all();
 
         // Regresar la vista de creación de proyectos
         return view('projects.create', [
-            'admins' => $admins,
-            'collaborators' => $collaborators,
             'clients' => $clients,
+            'users' => $users,
         ]);
     }
 
@@ -147,18 +144,15 @@ class ProjectController extends Controller
             return back()->with('error', '¡No tienes permiso para realizar esta acción!');
         }
 
-        // Obtener todos los admins
-        $admins = User::where('usertype', 'admin')->get();
-        // Obtener todos los colaboradores
-        $collaborators = User::where('usertype', 'collaborator')->get();
         // Obtener todos los clientes
         $clients = Client::all();
+        // Obtener todos los usuarios
+        $users = User::all();
 
         // Regresar la vista de edición de proyectos
         return view('projects.edit', [
             'project' => $project,
-            'admins' => $admins,
-            'collaborators' => $collaborators,
+            'users' => $users,
             'clients' => $clients,
         ]);
     }

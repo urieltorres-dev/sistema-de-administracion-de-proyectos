@@ -56,7 +56,7 @@
                 </ul>
             </div>
             <!-- Mostramos la ganacia del colaborador autenticado -->
-            @if (auth()->user()->usertype == 'collaborator')
+            @if (in_array(auth()->user()->id, $project->collaborators->pluck('id')->toArray()))
             <div class="px-6 py-2 border-b border-light-grey">
                 <div class="font-bold text-xl">Ganancia</div>
                 <p class="text-grey-darker text-base">{{$project->collaboratorPayments->where('id', auth()->user()->id)->first()->pivot->payment ?? ''}}</p>

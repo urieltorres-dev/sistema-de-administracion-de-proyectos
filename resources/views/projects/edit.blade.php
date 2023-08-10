@@ -145,8 +145,8 @@
                             @enderror"
                             id="admin" name="admin" type="text" required>
                                 <option value="">Seleccione una opcion</option>
-                                @foreach ($admins as $admin)
-                                    <option value="{{ $admin->id }}" @if($project->admin == $admin->id) selected @endif>{{ $admin->name }}</option>
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}" @if($project->admin == $user->id) selected @endif>{{ $user->name }}</option>
                                 @endforeach
                             </select>
                             @error('admin')
@@ -197,22 +197,22 @@
                         <div class="mb-4">
                             <p class="block text-gray-700 text-sm font-bold mb-2">Colaboradores del proyecto:</p>
                             <div class="flex flex-col">
-                                @foreach ($collaborators as $collaborator)
+                                @foreach ($users as $user)
                                     <div class="flex items-center">
                                         <div class="w-full md:w-1/2 px-3">
                                             <label class="flex items-center">
-                                                <input type="checkbox" name="collaborators[]" value="{{ $collaborator->id }}"
-                                                    @if(in_array($collaborator->id, old('collaborators', $project->collaborators->pluck('id')->toArray()))) checked @endif
+                                                <input type="checkbox" name="collaborators[]" value="{{ $user->id }}"
+                                                    @if(in_array($user->id, old('collaborators', $project->collaborators->pluck('id')->toArray()))) checked @endif
                                                     class="form-checkbox h-4 w-4 text-blue-600">
-                                                <span class="ml-2">{{ $collaborator->name }}</span>
+                                                <span class="ml-2">{{ $user->name }}</span>
                                             </label>
                                         </div>
                                         <div class="w-full md:w-1/2 px-3">
-                                            <input type="text" name="payment[{{ $collaborator->id }}]" id="pay_{{ $collaborator->id }}"
+                                            <input type="text" name="payment[{{ $user->id }}]" id="pay_{{ $user->id }}"
                                                 placeholder="Pago"
-                                                value="{{ old('payment.' . $collaborator->id, $project->collaboratorPayments->where('id', $collaborator->id)->first()->pivot->payment ?? '') }}"
-                                                @if(!in_array($collaborator->id, old('collaborators', $project->collaborators->pluck('id')->toArray()))) disabled @endif
-                                                class="ml-4 px-2 py-1 border rounded @if(in_array($collaborator->id, old('collaborators', $project->collaborators->pluck('id')->toArray()))) bg-white @else bg-gray-200 @endif">
+                                                value="{{ old('payment.' . $user->id, $project->collaboratorPayments->where('id', $user->id)->first()->pivot->payment ?? '') }}"
+                                                @if(!in_array($user->id, old('collaborators', $project->collaborators->pluck('id')->toArray()))) disabled @endif
+                                                class="ml-4 px-2 py-1 border rounded @if(in_array($user->id, old('collaborators', $project->collaborators->pluck('id')->toArray()))) bg-white @else bg-gray-200 @endif">
                                         </div>
                                     </div>
                                 @endforeach
