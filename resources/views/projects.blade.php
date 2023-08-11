@@ -25,10 +25,7 @@
         <!--Top user 1-->
         <div class="rounded rounded-t-lg overflow-hidden shadow max-w-xs">
             <div class="text-center px-3 pb-6 pt-2">
-                <form action="{{route('projects.show', $project)}}" method="GET" novalidate>
-                    @csrf
-                    <button class="text-black text-sm bold font-sans">{{$project->name}}</button>
-                </form>
+                <h3 class="text-black text-sm bold font-sans">{{$project->name}}</h3>
                 <p class="mt-2 font-sans font-light text-grey-700">@foreach ($clients as $client)
                     @if ($client->id == $project->client)
                         {{$client->name}}
@@ -52,6 +49,12 @@
                     </button>
                 </form>
                 @endif
+            </div>
+            <div class="flex justify-center pb-3 text-grey-dark">
+                <form action="{{route('projects.show', $project)}}" method="GET" novalidate>
+                    @csrf
+                    <button class="bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-4 rounded-full">Ver proyecto</button>
+                </form>
             </div>
         </div>
         @endif

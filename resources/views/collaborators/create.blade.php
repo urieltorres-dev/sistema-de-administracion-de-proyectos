@@ -152,6 +152,16 @@
                         </div>
                     </div>
 
+                    <!-- Creamos un campo oculto para guardar el valor de la imagen -->
+                    <div class="mb-5">
+                        <input type="hidden" name="file" value="{{old('file')}}"/>
+                        @error('file')
+                            <p class="bg-red-500 text-white my-2 rounded-lg text-center">
+                                {{$message}}
+                            </p>
+                        @enderror
+                    </div>
+
                     <button type="submit" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full">
                         Guardar colaborador
                     </button>
@@ -160,6 +170,12 @@
                         Regresar
                     </a>
                 </form>
+
+                <div class="md:w-1/2 px-10 pt-5">
+                    <form action="{{route('files.store')}}" method="POST" enctype="multipart/form-data" id="dropzone" class="dropzone border-dashed border-2 w-full h-96 rounded flex flex-col justify-center items-center">
+                        @csrf
+                    </form>
+                </div>
             </div>
         </div>
     </div>

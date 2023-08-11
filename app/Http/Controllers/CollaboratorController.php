@@ -57,6 +57,7 @@ class CollaboratorController extends Controller
             'job' => 'nullable|min:4|max:20',
             'company' => 'nullable|min:4|max:100',
             'password' => 'required|confirmed|min:6',
+            'file' => 'nullable',
         ]);
 
         // Creación de un nuevo colaborador
@@ -69,6 +70,7 @@ class CollaboratorController extends Controller
             'company' => $request->company,
             'password' => Hash::make($request->password),
             'usertype' => 'collaborator',
+            'profilephoto' => $request->file,
         ]);
 
         // Regresamos al formulario de creación de colaboradores con un mensaje de éxito
@@ -124,6 +126,7 @@ class CollaboratorController extends Controller
             'job' => 'nullable|min:4|max:20',
             'company' => 'nullable|min:4|max:20',
             'password' => 'nullable|confirmed',
+            'file' => 'nullable',
         ]);
 
         // Obtener los datos a actualizar
@@ -134,6 +137,7 @@ class CollaboratorController extends Controller
             'phone' => $request->phone,
             'job' => $request->job,
             'company' => $request->company,
+            'profilephoto' => $request->file,
         ];
 
         // Verificar si se proporcionó una nueva contraseña
