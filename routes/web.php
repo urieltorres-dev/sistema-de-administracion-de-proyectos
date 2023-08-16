@@ -99,6 +99,10 @@ Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])->name
 Route::put('/projects/{project}', [ProjectController::class, 'update'])->name('projects.update');
 // Ruta para regresar la vista de un proyecto
 Route::get('/projects/{project}/show', [ProjectController::class, 'show'])->name('projects.show');
+// Ruta para mostrar el archivo del proyecto
+Route::get('/projects/{project}/showfile', [ProjectController::class, 'showFile'])->name('projects.showFile');
+// Ruta para descargar un archivo
+Route::get('/projects/{project}/download', [ProjectController::class, 'download'])->name('projects.download');
 
 
 /*

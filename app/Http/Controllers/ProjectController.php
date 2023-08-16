@@ -231,5 +231,35 @@ class ProjectController extends Controller
             'clients' => $clients,
         ]);
     }
+
+    // Funcion para descargar un archivo
+    public function download($file)
+    {
+        // Obtener la ruta del archivo
+        $path = public_path('uploads'). '/' .$file;
+        // Verificar si el archivo existe
+        if(file_exists($path)){
+            // Descargar el archivo
+            return response()->download($path);
+        }else{
+            // Si el archivo no existe, regresamos a la vista de proyectos con un mensaje de error
+            return back()->with('error', '¡El archivo no existe!');
+        }
+    }
+
+    // Función para mostrar el archivo en el navegador
+    public function showFile($file)
+    {
+        // Obtener la ruta del archivo
+        $path = public_path('uploads'). '/' .$file;
+        // Verificar si el archivo existe
+        if(file_exists($path)){
+            // Mostrar el archivo en el navegador
+            return response()->file($path);
+        }else{
+            // Si el archivo no existe, regresamos a la vista de proyectos con un mensaje de error
+            return back()->with('error', '¡El archivo no existe!');
+        }
+    }
 }
 ?>

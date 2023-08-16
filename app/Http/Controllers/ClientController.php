@@ -49,8 +49,8 @@ class ClientController extends Controller
 
         // Validación de datos
         $this->validate($request, [
-            'name' => 'required|min:4|max:20',
-            'lastname' => 'required|min:4|max:20',
+            'name' => 'required|min:2|max:20',
+            'lastname' => 'required|min:2|max:20',
             'email' => 'required|email|unique:clients|max:60',
             'phone' => 'required|unique:clients|size:10|regex:/^[0-9]{10}$/',
             'company' => 'required|min:4|max:100',
@@ -111,8 +111,8 @@ class ClientController extends Controller
 
         // Validación de datos
         $this->validate($request, [
-            'name' => 'required|min:4|max:20',
-            'lastname' => 'required|min:4|max:20',
+            'name' => 'required|min:2|max:20',
+            'lastname' => 'required|min:2|max:20',
             'email' => 'required|email|max:60',
             'phone' => 'required|size:10|regex:/^[0-9]{10}$/',
             'company' => 'required|min:4|max:100',

@@ -50,8 +50,8 @@ class CollaboratorController extends Controller
 
         // Validación de datos
         $this->validate($request,[
-            'name' => 'required|min:4|max:20',
-            'lastname' => 'required|min:4|max:20',
+            'name' => 'required|min:2|max:20',
+            'lastname' => 'required|min:2|max:20',
             'email' => 'required|unique:users|email|max:60',
             'phone' => 'nullable|unique:users|size:10|regex:/^[0-9]{10}$/',
             'job' => 'nullable|min:4|max:20',
@@ -119,8 +119,8 @@ class CollaboratorController extends Controller
 
         // Validación de datos
         $this->validate($request, [
-            'name' => 'required|min:4|max:20',
-            'lastname' => 'required|min:4|max:20',
+            'name' => 'required|min:2|max:20',
+            'lastname' => 'required|min:2|max:20',
             'email' => 'required|email|max:60',
             'phone' => 'nullable|size:10|regex:/^[0-9]{10}$/',
             'job' => 'nullable|min:4|max:20',

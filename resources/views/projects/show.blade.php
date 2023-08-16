@@ -55,6 +55,16 @@
                     @endforeach
                 </ul>
             </div>
+            <!-- Mostramos el archivo del proyecto -->
+            @if ($project->file != null)
+            <div class="px-6 py-2 border-b border-light-grey">
+                <div class="font-bold text-xl">Archivo del proyecto</div>
+                <div class="py-6">
+                    <a href="{{route('projects.showFile', $project->file)}}" class="bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full" target="_blank">Ver archivo</a>
+                    <a href="{{route('projects.download', $project->file)}}" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full">Descargar</a>
+                </div>
+            </div>
+            @endif
             <!-- Mostramos la ganacia del colaborador autenticado -->
             @if (in_array(auth()->user()->id, $project->collaborators->pluck('id')->toArray()))
             <div class="px-6 py-2 border-b border-light-grey">
