@@ -40,7 +40,7 @@
           @error('email')
             border-red-500
           @enderror"
-          value="{{old('email')}}" id="email" name="email" type="email" required="" placeholder="Correo electrónico" aria-label="email">
+          value="john@example.com" id="email" name="email" type="email" required="" placeholder="Correo electrónico" aria-label="email">
           @error('email')
             <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
               {{$message}}
@@ -54,7 +54,7 @@
           @error('password')
           border-red-500
           @enderror"
-          id="password" name="password" type="password" required="" placeholder="*******" aria-label="password">
+          value="password123" id="password" name="password" type="password" required="" placeholder="*******" aria-label="password">
         </div>
 
         <div class="mt-4 items-center justify-between">

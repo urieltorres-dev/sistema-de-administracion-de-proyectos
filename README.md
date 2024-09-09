@@ -1,66 +1,99 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistema de Administración de Proyectos
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este sistema fue desarrollado como parte de un proyecto universitario para la asignatura **"Tecnologías y aplicaciones en internet"**. El objetivo del proyecto fue crear una aplicación web que facilitara la gestión y organización de proyectos. Se trabajó en binas, con un periodo de desarrollo de cuatro semanas, y cada semana se nos solicitó completar un hito para evaluar nuestro progreso.
 
-## About Laravel
+## Descripción del Proyecto
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+El proyecto final **Administración de Proyecto** sistema administrativo está diseñado para simplificar la administración de proyectos, la asignación de colaboradores y la gestión de clientes. Los administradores tienen control total sobre la creación y edición de proyectos, mientras que los colaboradores pueden gestionar sus propias asignaciones. El sistema permite agregar colaboradores, definir prioridades, gestionar pagos, y realizar un seguimiento detallado del estado de los proyectos.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Perfiles de usuario y funcionalidades
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Perfil Administrador
 
-## Learning Laravel
+1. **Tablero de indicadores:** 
+   - Muestra tablas que resumen los avances de los proyectos, ingresos, tareas y clientes.
+   
+2. **Gestor de colaboradores:**
+   - Listado en formato de cartas que permite agregar, editar y eliminar colaboradores. Visualiza la información clasificada de los colaboradores. [Ejemplo de la interfaz](https://smarthr.dreamguystech.com/php/template/employees.php).
+   
+3. **Gestor de Clientes:**
+   - Visualización de los clientes en un formato de cartas clasificado. Los administradores pueden agregar, editar y eliminar clientes. [Ejemplo de la interfaz](https://smarthr.dreamguystech.com/php/template/clients.php).
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+4. **Gestor de Proyectos:**
+   - Gestión de proyectos que incluye un listado con información relevante (nombre del proyecto, clientes, colaboradores, fechas, etc.). Cada proyecto permite la carga de archivos (imágenes, pdf), manejo de fechas de inicio y fin, así como la gestión de costos asociados. También se asignan colaboradores y clientes a los proyectos. [Ejemplo dado en clase](https://smarthr.dreamguystech.com/php/template/projects.php).
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Perfil Colaborador
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. **Tablero de Indicadores:**
+   - Proporciona gcartas que muestran los pagos, proyectos en proceso y proyectos pendientes.
 
-## Laravel Sponsors
+2. **Gestor de Finanzas:**
+   - Vista de estado de cuenta, que muestra los ingresos por proyecto. También se presenta un balance general. [Ejemplo dado en clase](https://smarthr.dreamguystech.com/php/template/payments.php).
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+3. **Gestor de Proyectos Asignados:**
+   - Listado de los proyectos en los que el colaborador está participando. Se muestran todos los proyectos asignados y su estado.
 
-### Premium Partners
+## Contribuciones del Equipo
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Aunque fue un proyecto en binas, la totalidad del desarrollo técnico, incluyendo la programación, implementación de funcionalidades y despliegue en Digital Ocean, fue realizado principalmente por mí.
 
-## Contributing
+## Tecnologías Utilizadas
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
++ **Lenguajes de Programación:** PHP, HTML, CSS y JavaScript
++ **Base de Datos:** MySQL
++ **Frameworks:** Laravel y Tailwind CSS
++ **Librerías:** SweetAlert2 y Dropzone
++ **Herramientas de Desarrollo:** Docker, Visual Studio Code
 
-## Code of Conduct
+## Instalación y Configuración
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Para ejecutar este proyecto en tu entorno local, sigue estos pasos:
 
-## Security Vulnerabilities
+1. **Clona el Repositorio:**
+```bash
+git clone https://github.com/urieltorres-dev/sistema-de-administracion-de-proyectos.git
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+2. **Instala las dependencias de PHP y JavaScript:**
+```bash
+composer install
+npm install
+npm run dev
+```
 
-## License
+3. **Configura el Entorno:**
++ Asegúrate de tener PHP y MySQL instalados.
++ Configura los parámetros de la base de datos en el archivo `.env`.
++ Ejecuta las migraciones y seeders para crear las tablas y cargar datos de prueba:
+```bash
+php artisan migrate --seed
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+4. **Ejecuta el Proyecto:**
++ Inicia el servidor de desarrollo de Laravel:
+```bash
+php artisan serve
+```
++ Accede a la aplicación a través de tu navegador en `http://localhost:8000`.
+
+## Capturas de Pantalla
+
+A continuación se muestran algunas capturas de pantalla de la aplicación:
+
+![Login](public/img/ss1.png)
+![Admin dashboard](public/img/ss2.png)
+![Colaborador dashboard](public/img/ss3.png)
+![Proyectos](public/img/ss4.png)
+
+## Demo
+
+Puedes ver una demostración en vivo del proyecto en [https://administracion-de-proyectos.zeabur.app/](https://administracion-de-proyectos.zeabur.app/).
+
+## Licencia
+
+Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo [LICENSE](https://choosealicense.com/licenses/mit/) para más detalles.
+
+## Contacto
+
+Para más información o consultas, puedes contactarme a través de [urieltorres.dev@gmail.com](mailto:urieltorres.dev@gmail.com) o en [github.com/urieltorres-dev](https://github.com/urieltorres-dev).
+
