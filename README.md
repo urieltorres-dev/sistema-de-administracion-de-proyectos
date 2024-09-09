@@ -14,10 +14,10 @@ El proyecto final **Administración de Proyecto** sistema administrativo está d
    - Muestra tablas que resumen los avances de los proyectos, ingresos, tareas y clientes.
    
 2. **Gestor de colaboradores:**
-   - Listado en formato de cartas que permite agregar, editar y eliminar colaboradores. Visualiza la información clasificada de los colaboradores. [Ejemplo de la interfaz](https://smarthr.dreamguystech.com/php/template/employees.php).
+   - Listado en formato de cartas que permite agregar, editar y eliminar colaboradores. Visualiza la información clasificada de los colaboradores. [Ejemplo dado en clase](https://smarthr.dreamguystech.com/php/template/employees.php).
    
 3. **Gestor de Clientes:**
-   - Visualización de los clientes en un formato de cartas clasificado. Los administradores pueden agregar, editar y eliminar clientes. [Ejemplo de la interfaz](https://smarthr.dreamguystech.com/php/template/clients.php).
+   - Visualización de los clientes en un formato de cartas clasificado. Los administradores pueden agregar, editar y eliminar clientes. [Ejemplo dado en clase](https://smarthr.dreamguystech.com/php/template/clients.php).
 
 4. **Gestor de Proyectos:**
    - Gestión de proyectos que incluye un listado con información relevante (nombre del proyecto, clientes, colaboradores, fechas, etc.). Cada proyecto permite la carga de archivos (imágenes, pdf), manejo de fechas de inicio y fin, así como la gestión de costos asociados. También se asignan colaboradores y clientes a los proyectos. [Ejemplo dado en clase](https://smarthr.dreamguystech.com/php/template/projects.php).
