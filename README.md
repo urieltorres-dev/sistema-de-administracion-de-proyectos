@@ -87,7 +87,7 @@ A continuación se muestran algunas capturas de pantalla de la aplicación:
 
 ## Demo
 
-Puedes ver una demostración en vivo del proyecto en [https://administracion-de-proyectos.zeabur.app/](https://administracion-de-proyectos.zeabur.app/).
+Por el momento la demo no está  disponible.
 
 ## Licencia
 
