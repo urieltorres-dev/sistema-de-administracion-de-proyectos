@@ -49,41 +49,91 @@ Aunque fue un proyecto en binas, la totalidad del desarrollo técnico, incluyend
 
 Para ejecutar este proyecto en tu entorno local, sigue estos pasos:
 
-1. **Clona el repositorio:**
+1. Clona el repositorio:
 ```bash
 git clone https://github.com/urieltorres-dev/sistema-de-administracion-de-proyectos.git
 ```
 
-2. **Instala las dependencias de PHP y JavaScript:**
+2. Instala las dependencias de Composer:
 ```bash
 composer install
-npm install
-npm run dev
 ```
 
-3. **Configura el entorno:**
-+ Asegúrate de tener PHP y MySQL instalados.
-+ Configura los parámetros de la base de datos en el archivo `.env`.
-+ Ejecuta las migraciones y seeders para crear las tablas y cargar datos de prueba:
+3. Instala las dependencias de Node.js:
+```bash
+npm install
+```
+
+4. Configura el archivo `.env` y genera la clave de la aplicación:
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+5. Ejecuta las migraciones y seeders:
 ```bash
 php artisan migrate --seed
 ```
 
-4. **Ejecuta el proyecto:**
-+ Inicia el servidor de desarrollo de Laravel:
+6. Inicia el servidor de desarrollo:
 ```bash
 php artisan serve
 ```
-+ Accede a la aplicación a través de tu navegador en `http://localhost:8000`.
+
+7. Ejecuta los assets de frontend:
+```bash
+npm run dev
+```
+
+8. Accede a la aplicación a través de tu navegador en `http://localhost:8000`.
 
 ## Capturas de pantalla
 
 A continuación se muestran algunas capturas de pantalla de la aplicación:
 
-![Login](public/img/ss1.png)
-![Admin dashboard](public/img/ss2.png)
-![Colaborador dashboard](public/img/ss3.png)
-![Proyectos](public/img/ss4.png)
+<table>
+  <tr>
+    <td align="center">
+      <img src="public/img/ss1.png" width="400" alt="Login">
+      <br><b>Login</b>
+    </td>
+    <td align="center">
+      <img src="public/img/ss2.png" width="400" alt="Register">
+      <br><b>Register</b>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="public/img/ss3.png" width="400" alt="Admin dashboard">
+      <br><b>Admin dashboard</b>
+    </td>
+    <td align="center">
+      <img src="public/img/ss4.png" width="400" alt="Gestión de clientes">
+      <br><b>Gestión de clientes</b>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="public/img/ss5.png" width="400" alt="Gestión de colaboradores">
+      <br><b>Gestión de colaboradores</b>
+    </td>
+    <td align="center">
+      <img src="public/img/ss6.png" width="400" alt="Gestión de proyectos">
+      <br><b>Gestión de proyectos</b>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="public/img/ss7.png" width="400" alt="Dashboard de los colaboradores">
+      <br><b>Dashboard de los colaboradores</b>
+    </td>
+    <td align="center">
+      <img src="public/img/ss8.png" width="400" alt="Gestión de proyectos para colaboradores">
+      <br><b>Gestión de proyectos para colaboradores</b>
+    </td>
+  </tr>
+  <tr>
+</table>
 
 ## Demo
 
